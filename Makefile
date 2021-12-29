@@ -6,17 +6,18 @@ objs := $(srcs:.md=.html)
 pdfs := $(srcs:.md=.pdf)
 
 var-revealjs-url := ../reveal.js
-var-theme        := solarized
+var-theme        := night
 var-history      := true
-var-progress     := false
+var-transition   := linear
+#var-progress     := false
 
 gen-vars = $(foreach v,$(filter var-%,$(.VARIABLES)),-V $(v:var-%=%)=$($(v)))
-
+gen-tmpl = $(firstword $(wildcard $(dir $<)template.html template.html))
 
 all: $(objs)
 
 clean:
-	rm $(objs)
+	rm -f $(objs)
 
 pdf: $(pdfs)
 
@@ -27,7 +28,7 @@ upload: all
 	@rsync --exclude=.git -va --delete . troglobit.com:222/var/www/talks.troglobit.com/
 
 %.html: %.md
-	pandoc -t revealjs $(call gen-vars) -s $< -o $@
+	pandoc -t html5 --template=$(call gen-tmpl) --standalone --section-divs $(call gen-vars) $< -o $@
 
 %.pdf: %.md
 	pandoc -t beamer $(call gen-vars) -s $< -o $@
