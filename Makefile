@@ -25,7 +25,7 @@ serve: $(objs)
 	@serve.sh $(srcs)
 
 upload: all
-	@rsync --exclude=.git -va --delete . troglobit.com:222/var/www/talks.troglobit.com/
+	@rsync --exclude=.git --exclude=draft -va --delete --port 222 . troglobit.com:/var/www/talks.troglobit.com/
 
 %.html: %.md
 	pandoc -t html5 --template=$(call gen-tmpl) --standalone --section-divs $(call gen-vars) $< -o $@
