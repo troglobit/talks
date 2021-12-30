@@ -6,10 +6,10 @@ objs := $(srcs:.md=.html)
 pdfs := $(srcs:.md=.pdf)
 
 var-revealjs-url := ../reveal.js
-var-theme        := night
+var-theme        := beige
 var-history      := true
 var-transition   := linear
-#var-progress     := false
+var-progress     := false
 
 gen-vars = $(foreach v,$(filter var-%,$(.VARIABLES)),-V $(v:var-%=%)=$($(v)))
 gen-tmpl = $(firstword $(wildcard $(dir $<)template.html template.html))
