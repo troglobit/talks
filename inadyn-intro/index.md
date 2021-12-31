@@ -1,6 +1,10 @@
-% In-a-Dyn -- DDNS What and How
-% Joachim Wiberg
-% February 17, 2020
+---
+title: In-a-Dyn
+subtitle: DDNS What and How
+author:
+ - Joachim Wiberg
+date: February 17, 2020
+---
 
 # In-a-Dyn DDNS
 
@@ -119,4 +123,6 @@
   → has a built-in .conf file validator  
   → supports custom providers  
   → automatic testing of Dyn.com and FreeDNS 
+
+# Questions?
 
