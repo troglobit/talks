@@ -8,7 +8,8 @@ pdfs := $(srcs:.md=.pdf)
 var-revealjs-url := ../reveal.js
 var-theme        := league
 var-history      := true
-var-transition   := linear
+//var-transition   := cube zoom slide linear convex
+var-transition   := none
 var-progress     := false
 
 gen-vars = $(foreach v,$(filter var-%,$(.VARIABLES)),-V $(v:var-%=%)=$($(v)))

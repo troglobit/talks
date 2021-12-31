@@ -9,7 +9,7 @@
 <meta name="description" content="$title$">    
 
 $for(author)$
-  <meta name="author" content="$author$" />
+<meta name="author" content="$author$" />
 $endfor$
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -19,17 +19,17 @@ $endfor$
 
 <link rel="stylesheet" href="/reveal.js/css/reveal.css">
 $if(theme)$
-  <link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme">
+<link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme">
 $else$
-  <link rel="stylesheet" href="/reveal.js/css/theme/default.css" id="theme">
+<link rel="stylesheet" href="/reveal.js/css/theme/default.css" id="theme">
 $endif$
 
 
 <!-- For syntax highlighting -->
 $if(highlight-style)$
-  <link rel="stylesheet" href="/reveal.js/lib/css/$highlight-style$.css">
+<link rel="stylesheet" href="/reveal.js/lib/css/$highlight-style$.css">
 $else$
-  <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css">
+<link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css">
 $endif$
 
 
@@ -90,9 +90,9 @@ $body$
   Reveal.initialize({
       controls: true,
       progress: true,
-      transition: 'none',
       history: true,
       center: true,
+      slideNumber: true,
 
       // The "normal" size of the presentation, aspect ratio will
       // be preserved when the presentation is scaled to fit different
