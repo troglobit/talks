@@ -6,7 +6,7 @@ objs := $(srcs:.md=.html)
 pdfs := $(srcs:.md=.pdf)
 
 var-revealjs-url := ../reveal.js
-var-theme        := beige
+var-theme        := league
 var-history      := true
 var-transition   := linear
 var-progress     := false
