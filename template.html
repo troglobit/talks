@@ -59,11 +59,14 @@ $endfor$
 <div class="slides">
 
 <section>
-<h1>$title$</h1>
-$for(author)$<h3>$author$</h3>$endfor$
-<p>
-<h4>$date$</h4>
-</p>
+  <h1>$title$</h1>
+  $if(subtitle)$
+  <h2>$subtitle$</h2>
+  $endif$
+  $for(author)$<h3>$author$</h3>$endfor$
+  <p>
+    <h4>$date$</h4>
+  </p>
 </section>  
 
 $if(toc)$
