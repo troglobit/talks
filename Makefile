@@ -15,10 +15,17 @@ var-progress     := false
 gen-vars = $(foreach v,$(filter var-%,$(.VARIABLES)),-V $(v:var-%=%)=$($(v)))
 gen-tmpl = $(firstword $(wildcard $(dir $<)template.html template.html))
 
-all: $(objs)
+all: $(objs) index.html
 
 clean:
 	rm -f $(objs)
+
+index.html:
+	@echo "<html><head><title>index</title></head><body><ul>"  > $@
+	@for pres in $(objs); do \
+		echo "<li><a href=\"$$pres\">`dirname $$pres`</a></li>" >> $@; \
+	done
+	@echo "</ul></body></html>" >> $@
 
 pdf: $(pdfs)
 
@@ -34,4 +41,4 @@ upload: all
 %.pdf: %.md
 	pandoc -t beamer $(call gen-vars) -s $< -o $@
 
-.PHONY: all clean serve
+.PHONY: all clean serve index.html
