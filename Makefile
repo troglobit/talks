@@ -37,8 +37,13 @@ list:
 	@echo "obj : $(objs)"
 
 index.html:
-	@echo "<html><head><title>index</title></head><body><ul>"  > $@
-	@for pres in $(objs); do \
+	@echo "<html><head><title>index</title></head><body>"  > $@
+	@echo "<h2>HTML</h2><ul>" >> $@
+	@for pres in $(html); do \
+		echo "<li><a href=\"$$pres\">`dirname $$pres`</a></li>" >> $@; \
+	done
+	@echo "</ul><h2>PDF</h2><ul>" >> $@
+	@for pres in $(pdfs); do \
 		echo "<li><a href=\"$$pres\">`dirname $$pres`</a></li>" >> $@; \
 	done
 	@echo "</ul></body></html>" >> $@
