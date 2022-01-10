@@ -56,6 +56,6 @@ upload: all
 	[ ! -f $(dir $@)/index.html ] && ln -s $(notdir $@) $(dir $@)index.html
 
 %.pdf: %.md
-	pandoc -t beamer $(call gen-vars) -s $< -o $@
+	(cd $(dir $@) && pandoc --pdf-engine=xelatex -t beamer $(notdir $<) -o $(notdir $@))
 
 .PHONY: all clean serve index.html
