@@ -67,7 +67,6 @@
         <23>1 2019-11-04T00:50:15.001234+01:00 troglobit myproc 8710 - - Kilroy was here.
 
 - MsgID can be any string without a space character
-  - Bombardier has standardized a few for their *Security Events*
 - Structured Data:
 
         [exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"]
