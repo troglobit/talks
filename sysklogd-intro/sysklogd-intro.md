@@ -1,6 +1,17 @@
-% sysklogd intro
-% Joachim Wiberg
-% November 25, 2019
+---
+title: sysklogd intro
+author: Joachim Wiberg
+date: November 25, 2019
+theme:
+ - night
+colortheme:
+ - solarized
+aspectratio: 1610
+lang: en-US
+section-titles: false
+link-citations: true
+link_attributes: true
+---
 
 ## Agenda
 
@@ -110,3 +121,11 @@
         syslogp(LOG_NOTICE, "MSGID", NULL, "Kilroy was here.");
         closelog();
 
+---
+
+# Fin
+
+Join the [discussion on GitHub][1] or  
+#troglobit on Liberachat if IRC is more your thing.
+
+[1]: https://github.com/troglobit/sysklogd/discussions/
