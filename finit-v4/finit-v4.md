@@ -1,9 +1,137 @@
-% Finit v4
-% Joachim Wiberg
-% April 26, 2021
+---
+title: 'Finit v4'
+subtitle: 'Gaps Filled with Frog DNA ...'
+header-includes:
+ - \usepackage{setspace}
+ - \logo{\hfill\includegraphics[height=2cm]{img/finit3.png}}
+author: 'Joachim Wiberg <troglobit@gmail.com>'
+theme:
+ - night
+colortheme:
+ - solarized
+aspectratio: 1610
+papersize: a4wide
+fontsize: 10pt
+width: 1920
+height: 1280
+minScale: 0.1
+maxScale: 5.0
+transition: none
+date: May 10, 2021
+lang: en-US
+section-titles: false
+link-citations: true
+link_attributes: true
+---
 
-# Removed
-## features
+# What is Finit?
+
+---
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="40%"}
+## Background
+
+- Alternative init, c.f., traditional UNIX System V init, or systemd
+- Reverse engineered from the Asus EeePC *fastinit* by Claudio Matsuoka
+- Finit v1 was very limited, idea was to limit then expensive fork+exec calls  
+  → get to X quickly!
+
+![Original logo](img/finit.jpg){ width=90% }
+
+:::
+::: {.column width="60%" align=bottom}
+
+![Finit v1 booting Debian GNU/Linux](img/finit-screenshot.jpg)
+:::
+::::::::::::::
+
+::: notes
+
+- Existed before systemd
+- Has runlevels, but not like sysv init
+
+:::
+
+---
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="50%"}
+
+## Evolution
+
+- Start services in massive parallel
+- Handle dependencies between services
+- Monitor services, restart if they crash
+- Built-in automatic fsck
+- Built-in automatic modprobe
+- Built-in automatic network bring-up
+
+:::
+::: {.column width="50%" align=bottom}
+![Finit v4 booting Alpine Linux](img/finit4-screenshot.png){ width=100% }
+:::
+::::::::::::::
+
+::: notes
+
+
+:::
+
+---
+
+## /etc/finit.conf
+
+\footnotesize
+```
+task [S] /libexec/system/setup.sh  -- Bootstrap system
+
+service [2345] foo -args           -- Foo service
+
+service [2345] <pid/foo> bar -args -- Bar service
+service [2345] <pid>bar> baz -args -- Baz service
+
+tty [12345789] console
+tty :1 [12345789] tty1
+tty :2 [2345] tty2
+tty :3 [2345] tty3
+
+service [LVLS] <COND> log env:[-]/etc/default/daemon daemon ARGS -- Service daemon
+^       ^      ^      ^   ^                          ^      ^       ^
+|       |      |      |   |                          |      |        `---------- Optional description
+|       |      |      |   |                          |       `------------------ Daemon arguments
+|       |      |      |   |                           `------------------------- Path to daemon
+|       |      |      |    `---------------------------------------------------- Optional env. file
+|       |      |       `-------------------------------------------------------- Redirect output to log
+|       |       `--------------------------------------------------------------- Optional conditions
+|        `---------------------------------------------------------------------- Optional Runlevels
+ `------------------------------------------------------------------------------ Monitored application
+```
+\normalsize
+
+---
+
+# Changes in v4
+
+---
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="50%"}
+## What's New?
+
+- `job:id` → `name:id`
+- **cgroups**
+- Environment files for services, with dependency tracking
+- tty's are now services, finally!
+  - conditions & status
+  - enable/disable & start/stop
+- SysV init script support
+- `pre:script` and `post:script` support for init and cleanup tasks
+- Proper rescue mode with `sulogin(9)`
+- Background network bring-up, of `/etc/network/interfaces`
+:::
+::: {.column width="50%" align=bottom}
+## What's Removed?
 
 - Built-in inetd support, instead use:
   - openbsd-inetd
@@ -16,22 +144,109 @@
 - Emergency shell  
   → replaced with rescue mode (next slide)
 
-- `HOOK_SVC_START` and `HOOK_SVC_LOST` -- too fragile
+- `HOOK_SVC_START` and `HOOK_SVC_LOST`  
+  → too fragile
+:::
+::::::::::::::
 
+::: notes
 
-# New
+- A lot
+- Here we only list a few noteworthy features
+
+:::
+
+---
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="60%"}
+
 ## features
 
-- Major updates to initctl tool, commands + output changes
-- Environment files for `services`, with dependency tracking
-- tty’s are now services (finally!)  
-  → conditions, enable/disable, start/stop, status, ...
+- Major updates to initctl tool (commands + output)
+- Environment files with dependency tracking
+- tty’s are finally standard services
+  - conditions, enable/disable, start/stop, etc.
+  - new `notty` flag for board bringup
+  - new `rescue` flag starts `sulogin` for security
 - SysV init script support
 - pre-/post-script support for init and cleanup tasks
-- Proper rescue mode with `sulogin` for basic protection
-- Automatic network bringup if `/etc/network/interfaces` exists
+- Support for `/etc/network/interfaces`
 
-## cgroups v2
+:::
+::: {.column width="40%" align=bottom}
+
+![](img/finit-initctl-status-foo.png){ width=100% }
+
+:::
+::::::::::::::
+
+---
+
+# initctl
+
+## changes
+
+- service identity same as in .conf file: job:id → name:id
+
+        name:foo
+        :id
+
+- greatly improved output from
+
+        initctl status
+        initctl status foo
+		
+- improved interaction with user defined conditions
+
+- new commands
+
+---
+
+# initctl
+
+## new commands
+
+```
+initctl [status]             # Show status of all services (old)
+initctl status foo           # Show status of service foo
+initctl show foo             # show foo.conf
+initctl edit [-c] foo        # edit (optionally create) foo.conf
+initctl touch foo            # mark foo.conf as modified for reload
+initctl cond [set,clear] bar # user conditions, static & one-shot
+initctl ps                   # tree view of known services with arguments
+initctl top                  # top like view of services (cgroups)
+initctl cgroup               # cgroup view of services (limits)
+```
+
+---
+
+# cgroups v2
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="40%"}
+
+- New tooling to inspect resources:
+
+        initctl ps
+        initctl top
+        initctl cgroup
+- Tree view with ps subcommand
+
+        root/
+          |-- init/
+          |    `-- finit
+          |-- system/
+          |    |-- ssh/
+          |    |    `-- dropbear
+          |    `-- Quagga/
+          |         |-- ospfd
+          |         `-- zebra
+          `-- user/
+               |-- sh
+               `-- getty tty2
+:::
+::: {.column width="60%" align=bottom}
 
 - Default groups:
   - init (100)
@@ -42,39 +257,15 @@
 - Standard cgroup v2 syntax in:
   - `finit.conf` for defining/modifying groups
   - `finit.d/*.conf` for per-service group assignment
-- New tooling to inspect resource use:
 
-        initctl ps
-        initctl top
-        initctl cgroup
+:::
+::::::::::::::
 
-## initctl changes
-
-- service identity same as in .conf file  
-  job:id → name:id
-
-        name:foo
-        :id
-
-- greatly improved output from
-
-        initctl status
-        initctl status foo
-
-## initctl commands
-
-```
-initctl status foo                 # Show status of service foo
-initctl show foo                   # show foo.conf
-initctl edit [-c] foo              # edit (optionally create) foo.conf
-initctl touch foo                  # mark foo.conf as modified for reload
-initctl cond [set,clear] usr/bar   # user defined (static & oneshot) conditions
-initctl ps                         # tree view of known services with arguments
-initctl top                        # top like view of services (cgroups)
-initctl cgroup                     # cgroup view of services (limits)
-```
+---
 
 # In-Depth
+
+---
 
 ## pre/post scripts
 
@@ -83,14 +274,17 @@ initctl cgroup                     # cgroup view of services (limits)
         service pre:/path/to/script.sh  foo -args -- Foo service
         service post:/path/to/script.sh bar -args -- Bar service
 
-- Runs before services transition to READY state, conditions do the rest
-- Runs after services have transitioned to STOPPING state, for cleanup task
+- Runs before services transition to `READY` state, conditions do the rest
+- Runs after services have transitioned to `STOPPING` state, for cleanup task
 - Default timeout for scripts: 3 sec, customize with general kill delay
 
-        service post:/path/to/script.sh kill:10 baz -args -- Baz service
+        service post:/path/to/script.sh kill:9 baz -args -- Baz service
+
+---
 
 ## environment files
 
+- `/etc/default/foo` or `/etc/conf.d/foo`
 - Available for service stanzas
 
         service env:/etc/default/foo foo -n $FOO_ARGS -- Foo service
@@ -102,37 +296,48 @@ initctl cgroup                     # cgroup view of services (limits)
         $ cat /etc/default/foo
         FOO_ARGS=”-args”
 
+---
+
 ## cgroups v2
 
-- Global configuration of groups, std.kernel syntax in
-  `/etc/finit.conf` or `/etc/finit.d/*.conf` files.  For an overview,
-  use `initctl cgroup`:
+- Global configuration of groups, standard cgrops v2 kernel syntax in
+  `/etc/finit.conf` or `/etc/finit.d/*.conf` files.  
 
         cgroup init   cpu.weight 100
         cgroup user   cpu.weight 100
         cgroup hej    cpu.weight 100
         cgroup system cpu.weight 9700
 
+  For an overview, use `initctl cgroup`
+
 - All run/task/services are by default placed in the system group
 - Local getty are placed in the user group
   - Need PAM plugin to move PID of SSH and telnet users after login
 
+---
+
+## tuning cgroups
+
 - Per service selection of group, or for a set of tasks:
 
         cgroup.hej:mem.max:12345
-        system [23] <pid/foo> bar -- Bar service
-        system [23] <pid/foo> baz -- Baz service
+        service [23] <pid/foo> bar -- Bar service
+        service [23] <pid/foo> baz -- Baz service
 
 - Per service tweaking of limits also possible:
 
-        system [23] <pid/foo> cgroup.hej:mem.max:12345 frob -- Frob service
+        service [23] <pid/foo> cgroup.hej:mem.max:12345 frob -- Frob service
 
 - Changes to cgroup configuration changes take effect after `initctl reload`
 
 
 # Demo
 
-<script id="asciicast-410316" src="https://asciinema.org/a/410316.js" async></script>
+---
+
+[![Finit v4 Demo](https://asciinema.org/a/410316.png)](https://asciinema.org/a/410316)
+
+---
 
 # Fin
 
