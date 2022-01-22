@@ -1,6 +1,7 @@
 PATH := $(PATH):$(CURDIR)/bin
 TOP  := $(CURDIR)
 PORT ?= 8088
+HTMLOPT = -V revealjs-url=https://unpkg.com/reveal.js@3.9.2/
 
 ign  := $(wildcard reveal.js/*.md)
 mds  := $(wildcard */*.md)
@@ -9,7 +10,8 @@ srcs := $(filter-out $(ign),$(mds))
 nopdf := multicast-intro/multicast-intro.pdf inadyn-intro/inadyn-intro.pdf
 pdfs := $(filter-out $(nopdf),$(srcs:.md=.pdf))
 # fails layouting :-7
-nohtml := finit-core/finit-core.html $(wildcard reveal.js/*.html)
+# finit-core/finit-core.html
+nohtml :=  $(wildcard reveal.js/*.html)
 html   := $(filter-out $(nohtml),$(srcs:.md=.html)) $(filter-out $(nohtml),$(wildcard */index.html))
 objs   := $(html) $(pdfs)
 
@@ -56,11 +58,12 @@ serve: $(objs)
 upload: all
 	@rsync --exclude=.git --exclude=draft -va --delete --port 222 . troglobit.com:/var/www/talks.troglobit.com/
 
+#	pandoc -t html5 --template=$(call gen-tmpl) --standalone --section-divs $(call gen-vars) $< -o $@
 %.html: %.md
-	pandoc -t html5 --template=$(call gen-tmpl) --standalone --section-divs $(call gen-vars) $< -o $@
-	[ ! -f $(dir $@)/index.html ] && ln -s $(notdir $@) $(dir $@)index.html
+	pandoc -t revealjs -s $(HTMLOPT) -o $@ $^
+	[ -f $(dir $@)index.html ] || ln -sf $(notdir $@) $(dir $@)index.html
 
 %.pdf: %.md
-	(cd $(dir $@) && pandoc --pdf-engine=xelatex -t beamer $(notdir $<) -o $(notdir $@))
+	(cd $(dir $@) && pandoc -s --pdf-engine=xelatex -V theme=metropolis -t beamer $(notdir $<) -o $(notdir $@))
 
 .PHONY: all clean serve index.html
