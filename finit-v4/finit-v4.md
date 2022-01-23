@@ -1,23 +1,17 @@
 ---
-title: 'Finit v4'
-subtitle: 'Gaps Filled with Frog DNA ...'
+title: Finit v4
+subtitle: Gaps Filled with Frog DNA ...
+date: May 10, 2021
 header-includes:
  - \usepackage{setspace}
  - \logo{\hfill\includegraphics[height=2cm]{img/finit3.png}}
-author: 'Joachim Wiberg <troglobit@gmail.com>'
-theme:
- - night
-colortheme:
- - solarized
+ - \setmonofont{Envy Code R}
+author: Joachim Wiberg <troglobit@gmail.com>
+theme: metropolis
 aspectratio: 1610
 papersize: a4wide
-fontsize: 10pt
-width: 1920
-height: 1280
-minScale: 0.1
-maxScale: 5.0
+fontsize: 8pt
 transition: none
-date: May 10, 2021
 lang: en-US
 section-titles: false
 link-citations: true
@@ -28,9 +22,10 @@ link_attributes: true
 
 ---
 
-:::::::::::::: {.columns align=center totalwidth=11em}
-::: {.column width="40%"}
 ## Background
+
+:::::::::::::: {.columns align=center totalwidth=11em}
+::: {.column width="50%"}
 
 - Alternative init, c.f., traditional UNIX System V init, or systemd
 - Reverse engineered from the Asus EeePC *fastinit* by Claudio Matsuoka
@@ -40,7 +35,7 @@ link_attributes: true
 ![Original logo](img/finit.jpg){ width=90% }
 
 :::
-::: {.column width="60%" align=bottom}
+::: {.column width="50%" align=bottom}
 
 ![Finit v1 booting Debian GNU/Linux](img/finit-screenshot.jpg)
 :::
@@ -185,7 +180,9 @@ service [LVLS] <COND> log env:[-]/etc/default/daemon daemon ARGS -- Service daem
 
 # initctl
 
-## changes
+---
+
+## initctl changes
 
 - service identity same as in .conf file: job:id → name:id
 
@@ -203,20 +200,23 @@ service [LVLS] <COND> log env:[-]/etc/default/daemon daemon ARGS -- Service daem
 
 ---
 
-# initctl
+## new initctl commands
 
-## new commands
+- Detailed status of services, with
+- improved integration of service management, and 
+- custom `usr/` conditions
+- Also, spin-offs from the addition of cgroups support
 
 ```
-initctl [status]             # Show status of all services (old)
-initctl status foo           # Show status of service foo
-initctl show foo             # show foo.conf
-initctl edit [-c] foo        # edit (optionally create) foo.conf
-initctl touch foo            # mark foo.conf as modified for reload
-initctl cond [set,clear] bar # user conditions, static & one-shot
-initctl ps                   # tree view of known services with arguments
-initctl top                  # top like view of services (cgroups)
-initctl cgroup               # cgroup view of services (limits)
+initctl [status]               # Show status of all services (old)
+initctl status foo             # Show status of service foo
+initctl show foo               # show foo.conf
+initctl edit [-c] foo          # edit (optionally create) foo.conf
+initctl touch foo              # mark foo.conf as modified for reload
+initctl cond [set,clear] bar   # user conditions, static & one-shot
+initctl ps                     # tree view of known services with arguments
+initctl top                    # top like view of services (cgroups)
+initctl cgroup                 # cgroup view of services (limits)
 ```
 
 ---
@@ -336,6 +336,12 @@ initctl cgroup               # cgroup view of services (limits)
 ---
 
 [![Finit v4 Demo](https://asciinema.org/a/410316.png)](https://asciinema.org/a/410316)
+
+::: notes
+
+<https://asciinema.org/a/410316>
+
+:::
 
 ---
 
