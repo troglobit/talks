@@ -1,6 +1,16 @@
-% Style
-% Joachim Wiberg
-% April 18, 2019
+---
+title: Style
+author: Joachim Wiberg
+date: April 18, 2019
+theme: metropolis
+aspectratio: 1610
+fontsize: 9pt
+aspectratio: 1610
+lang: en-US
+section-titles: false
+link-citations: true
+link_attributes: true
+---
 
 # Style
 
@@ -16,6 +26,8 @@
 - Be friendly to others, and if not, at least to yourself in two weeks ...
 
 # Coding Style
+
+---
 
 ## Internal Code
 
@@ -34,6 +46,8 @@
   - e.g., tabs vs spaces
   - Emacs Magit has preview when comitting -- very usefule
   
+---
+
 ## Open Source
 
 - Open Source packages have their own style
@@ -43,8 +57,10 @@
   - How to use quilt for patch managment
   - How to use GitHub for forks/patches
 
-> **Remember:** do *not* use internal references or customer names in
->  Open Source patches or GitHub!  E.g., commit messages, comments ...
+> **Remember:** please avoid internal references and customer names in  
+>  Open Source patches or in GitHub commit messages, comments ...
+
+---
 
 ## Recommended C APIs
 
@@ -59,6 +75,8 @@
 |                        | `clock_gettime()`       | CLOCK_MONOTONIC or CLOCK_BOOTTIME           |
 | `gettimeofday()`       |                         | Same as above, unless wall time is intended |
 |                        |                         |                                             |
+
+---
 
 ## Comment Style
 
@@ -75,6 +93,7 @@
 
 > Can you refactor the code to make it more readable?
 
+---
 
 ## Commit Style
 
@@ -95,6 +114,7 @@
   - *"Update after code audit and feedback from team"*
   - *"Update kernel submodule: add sync for mdb host entries"*
 
+---
 
 ## Commit Example
 
