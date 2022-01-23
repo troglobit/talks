@@ -15,7 +15,7 @@ html   := $(filter-out $(nohtml),$(srcs:.md=.html)) $(filter-out $(nohtml),$(wil
 objs   := $(html) $(pdfs)
 
 var-revealjs-url := ../reveal.js
-var-theme        := league
+var-theme        := wiberg
 var-history      := true
 #var-transition   := cube zoom slide linear convex
 var-transition   := none
