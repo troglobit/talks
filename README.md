@@ -24,5 +24,11 @@ To convert svg files for inclusion in pdfs, you need:
 
     # sudo apt install librsvg2-bin
 
+Some links to useful stuff:
+
+  - <https://www.tug.org/texlive//devsrc/Master/texmf-dist/doc/latex/beamertheme-metropolis/metropolistheme.pdf>
+  - <https://github.com/matze/mtheme>
+  - <https://pandoc.org/MANUAL.html>
+
 Have fun!  
  /Joachim
