@@ -1,8 +1,7 @@
 ---
 title: In-a-Dyn
 subtitle: DDNS What and How
-author:
- - Joachim Wiberg
+author: Joachim Wiberg
 date: February 17, 2020
 ---
 
@@ -47,9 +46,8 @@ date: February 17, 2020
    manually, of course, but most users prefer an automatic service do
    this for them
 
-> → A good DDNS client actively tracks changes to your *external* IP
-> address, and automatically updates your DDNS provider(s).
-
+> A good DDNS client actively tracks changes to your *external* IP address,  
+> and automatically updates your DDNS provider(s).
 
 ## Common Use-Case
 
