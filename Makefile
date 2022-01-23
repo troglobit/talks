@@ -1,7 +1,6 @@
 PATH := $(PATH):$(CURDIR)/bin
 TOP  := $(CURDIR)
 PORT ?= 8088
-HTMLOPT = -V revealjs-url=https://unpkg.com/reveal.js@3.9.2/
 
 ign  := $(wildcard reveal.js/*.md)
 mds  := $(wildcard */*.md)
@@ -18,7 +17,7 @@ objs   := $(html) $(pdfs)
 var-revealjs-url := ../reveal.js
 var-theme        := league
 var-history      := true
-//var-transition   := cube zoom slide linear convex
+#var-transition   := cube zoom slide linear convex
 var-transition   := none
 var-progress     := false
 
@@ -60,10 +59,10 @@ upload: all
 
 #	pandoc -t html5 --template=$(call gen-tmpl) --standalone --section-divs $(call gen-vars) $< -o $@
 %.html: %.md
-	pandoc -t revealjs -s $(HTMLOPT) -o $@ $^
+	pandoc -t revealjs -s $(call gen-vars) -o $@ $^
 	[ -f $(dir $@)index.html ] || ln -sf $(notdir $@) $(dir $@)index.html
 
 %.pdf: %.md
-	(cd $(dir $@) && pandoc -s --pdf-engine=xelatex -V theme=metropolis -t beamer $(notdir $<) -o $(notdir $@))
+	(cd $(dir $@) && pandoc -s --pdf-engine=xelatex -t beamer $(notdir $<) -o $(notdir $@))
 
 .PHONY: all clean serve index.html
