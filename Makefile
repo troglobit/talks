@@ -6,12 +6,12 @@ ign  := $(wildcard reveal.js/*.md)
 mds  := $(wildcard */*.md)
 srcs := $(filter-out $(ign),$(mds))
 # fails to convert svgs :-/
-nopdf := multicast-intro/multicast-intro.pdf inadyn-intro/inadyn-intro.pdf
+#nopdf := multicast-intro/multicast-intro.pdf inadyn-intro/inadyn-intro.pdf
 pdfs := $(filter-out $(nopdf),$(srcs:.md=.pdf))
 # fails layouting :-7
 # finit-core/finit-core.html
 nohtml :=  $(wildcard reveal.js/*.html)
-html   := $(filter-out $(nohtml),$(srcs:.md=.html)) $(filter-out $(nohtml),$(wildcard */index.html))
+html   := $(filter-out $(nohtml),$(srcs:.md=.html))
 objs   := $(html) $(pdfs)
 
 var-revealjs-url := ../reveal.js
@@ -28,6 +28,7 @@ all: $(objs) index.html
 
 clean:
 	rm -f $(objs)
+	find . -maxdepth 2 -name index.html -type l -delete
 
 list:
 	@echo "TOP : $(TOP)"
@@ -36,16 +37,18 @@ list:
 	@echo "src : $(srcs)"
 	@echo "pdf : $(pdfs)"
 	@echo "obj : $(objs)"
+	@echo "html: $(html)"
 
 index.html:
 	@echo "<html><head><title>index</title></head><body>"  > $@
 	@echo "<h2>HTML</h2><ul>" >> $@
 	@for pres in $(html); do \
-		echo "<li><a href=\"$$pres\">`dirname $$pres`</a></li>" >> $@; \
+		dir=`dirname $$pres`; \
+		echo "<li><a href=\"/$$dir/\">$$dir</a></li>" >> $@; \
 	done
 	@echo "</ul><h2>PDF</h2><ul>" >> $@
 	@for pres in $(pdfs); do \
-		echo "<li><a href=\"$$pres\">`dirname $$pres`</a></li>" >> $@; \
+		echo "<li><a href=\"/$$pres\">`dirname $$pres`</a></li>" >> $@; \
 	done
 	@echo "</ul></body></html>" >> $@
 
