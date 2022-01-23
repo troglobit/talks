@@ -681,3 +681,12 @@ select Preformat, then paste with the middle button.
 
 # Fin
 
+## References
+
+- <https://bootlin.com/pub/conferences/2016/collab-summit/petazzoni-upstreaming-hw-support-in-linux-kernel-why-how.pdf>
+- <https://www.ibrahimatlinux.com/uploads/6/3/9/7/6397792/03.pdf>
+- <https://opensource.guide/how-to-contribute/>
+- <https://www.slideshare.net/linaroorg/upstreaming-101-sfo17tr02>
+- <https://www.slideshare.net/linaroorg/bud17tr03-upstreaming-201>
+- <https://01.org/community/signed-process>
+
