@@ -5,7 +5,7 @@ author: Waldekranz & Wiberg
 date: January 25, 2022
 transition: none
 lang: en-US
-institute: Slides under CC-BY-SA 3.0
+institute: Slides available under CC-BY-SA 4.0
 abstract: |
   A brief introduction to submitting changes to upstream Open Source projects.
 
@@ -28,8 +28,6 @@ link_attributes: true
  - Email Clients
  - Examples
 
-# Why?
-
 ---
 
 ## Terminology & Overview
@@ -44,7 +42,8 @@ link_attributes: true
   - Some licenses *require*, all projects appreciate, publishing changes
   - *Upstreaming*: the act of publishing changes to an upstream project
 
----
+
+# Why?
 
 ## If you can't beat 'em -- join 'em!
 
