@@ -19,3 +19,10 @@ with the amazing Metropolis PDF theme:
     </fontconfig>
     <ESC>:wq
     $ sudo fc-cache -fsv
+
+To convert svg files for inclusion in pdfs, you need:
+
+    # sudo apt install librsvg2-bin
+
+Have fun!  
+ /Joachim
