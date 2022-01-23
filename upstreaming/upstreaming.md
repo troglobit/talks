@@ -1,7 +1,7 @@
 ---
 title: Upstreaming Patches
 subtitle: an introduction
-author: Joachim Wiberg & Tobias Waldekranz
+author: Waldekranz & Wiberg
 date: January 25, 2022
 transition: none
 lang: en-US
@@ -11,7 +11,7 @@ abstract: |
 
   The presentation covers Why this is needed, What is suitable for upstreaming
   and How upstreaming should be done, and practically How it can be achieved.
-theme: "metropolis"
+theme: metropolis
 aspectratio: 1610
 fontsize: 9pt
 code-block-font-size: \scriptsize
