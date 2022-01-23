@@ -62,6 +62,7 @@ upload: all
 	pandoc -t revealjs -s $(call gen-vars) -o $@ $^
 	[ -f $(dir $@)index.html ] || ln -sf $(notdir $@) $(dir $@)index.html
 
+# Beamer speaker notes: -V classoption=notes 
 %.pdf: %.md
 	(cd $(dir $@) && pandoc -s --pdf-engine=xelatex -t beamer $(notdir $<) -o $(notdir $@))
 
