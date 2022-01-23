@@ -40,17 +40,57 @@ list:
 	@echo "html: $(html)"
 
 index.html:
-	@echo "<html><head><title>index</title></head><body>"  > $@
+	@echo "<!DOCTYPE html>" > $@
+	@echo "<html lang=\"en-US\"><head><meta charset=\"utf-8\"><title>index</title>" >> $@
+	@echo "  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">" >> $@
+	@echo "  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">" >> $@
+	@echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui\">" >> $@
+	@echo "<link rel=\"stylesheet\" href=\"/reveal.js/css/reveal.css\">" >> $@
+	@echo "<style type=\"text/css\">"  >> $@
+	@echo "     code{white-space: pre-wrap;}" >> $@
+	@echo "     span.smallcaps{font-variant: small-caps;}" >> $@
+	@echo "     span.underline{text-decoration: underline;}" >> $@
+	@echo "     div.column{display: inline-block; vertical-align: top; width: 50%;}" >> $@
+	@echo "</style>" >> $@
+	@echo "<link rel=\"stylesheet\" href=\"/reveal.js/css/theme/wiberg.css\"></head><body>" >> $@
+	@echo "  <div class=\"reveal\"><div class=\"slides\">" >> $@
+	@echo "   <section id=\"title-index\" class=\"slide level2\">">> $@
+	@echo "<h1>talks.troglobit.com</h1>" >> $@
+	@echo "   <div class=\"columns\"><div class=\"column\" style=\"width:50%;\">" >> $@
 	@echo "<h2>HTML</h2><ul>" >> $@
 	@for pres in $(html); do \
 		dir=`dirname $$pres`; \
 		echo "<li><a href=\"/$$dir/\">$$dir</a></li>" >> $@; \
 	done
-	@echo "</ul><h2>PDF</h2><ul>" >> $@
+	@echo "</ul></div><div class=\"column\" style=\"width:50%;\">" >> $@
+	@echo "<h2>PDF</h2><ul>" >> $@
 	@for pres in $(pdfs); do \
 		echo "<li><a href=\"/$$pres\">`dirname $$pres`</a></li>" >> $@; \
 	done
-	@echo "</ul></body></html>" >> $@
+	@echo "</ul></div></div></section></div></div>" >>$@
+	@echo "  <script src=\"/reveal.js/lib/js/head.min.js\"></script>" >>$@
+	@echo "  <script src=\"/reveal.js/js/reveal.js\"></script>"  >>$@
+	@echo "  <script>" >> $@
+	@echo "" >> $@
+	@echo "      // Full list of configuration options available at:" >> $@
+	@echo "      // https://github.com/hakimel/reveal.js#configuration" >> $@
+	@echo "      Reveal.initialize({" >> $@
+	@echo "        // Display a presentation progress bar" >> $@
+	@echo "        progress: false," >> $@
+	@echo "        // Push each slide change to the browser history" >> $@
+	@echo "        history: true," >> $@
+	@echo "        // Transition style" >> $@
+	@echo "        transition: 'none', // none/fade/slide/convex/concave/zoom" >> $@
+	@echo "" >> $@
+	@echo "        // Optional reveal.js plugins" >> $@
+	@echo "        dependencies: [" >> $@
+	@echo "          { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } }," >> $@
+	@echo "          { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true }," >> $@
+	@echo "          { src: '../reveal.js/plugin/notes/notes.js', async: true }" >> $@
+	@echo "        ]" >> $@
+	@echo "      });" >> $@
+	@echo "    </script>" >> $@
+	@echo "</body></html>" >> $@
 
 pdf: $(pdfs)
 
