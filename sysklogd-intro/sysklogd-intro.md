@@ -2,10 +2,9 @@
 title: sysklogd intro
 author: Joachim Wiberg
 date: November 25, 2019
-theme:
- - night
-colortheme:
- - solarized
+theme: metropolis
+aspectratio: 1610
+fontsize: 9pt
 aspectratio: 1610
 lang: en-US
 section-titles: false
@@ -19,8 +18,11 @@ link_attributes: true
 - syslogd
 - API
 
+---
 
 # Standards & Formats
+
+---
 
 ## 4.3BSD, June 1986
 
@@ -34,6 +36,8 @@ link_attributes: true
 - Remote syslog format (wire)
 
         <23>Kilroy was here.
+
+---
 
 ## RFC3164, August 2001
 
@@ -58,6 +62,7 @@ link_attributes: true
 
         <23>Aug 24 05:14:15 192.0.2.1 myproc[8710]: Kilroy was here.
 
+---
 
 ## RFC5424, March 2009
 
@@ -84,6 +89,8 @@ link_attributes: true
 
 # syslogd
 
+---
+
 ## sysklogd vs syslog-ng vs rsyslogd
 
 - sysklogd is pure UNIX
@@ -91,12 +98,16 @@ link_attributes: true
   written by Rainer Gerhards, who wrote RFC5424
 - syslog-ng and rsyslogd support SQL/NoSQL front/back-ends
 
+---
+
 ## sysklogd strengths
 
 - Based on FreeBSD syslogd
 - Fully supports RFC3164 and RFC5424
 - NetBSD syslogp() API for native RFC5424 support
 - Small ~60 kiB
+
+---
 
 ## sysklogd future work
 
@@ -106,10 +117,14 @@ link_attributes: true
 
 # API
 
+---
+
 ## Existing API
 
 - POSIX syslog() as implemented in GLIBC, musl-libc, uClibc
 - Only supports RFC3164
+
+---
 
 ## NetBSD API
 
