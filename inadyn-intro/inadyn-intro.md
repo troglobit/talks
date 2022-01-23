@@ -3,6 +3,14 @@ title: In-a-Dyn
 subtitle: DDNS What and How
 author: Joachim Wiberg
 date: February 17, 2020
+theme: metropolis
+aspectratio: 1610
+fontsize: 9pt
+aspectratio: 1610
+lang: en-US
+section-titles: false
+link-citations: true
+link_attributes: true
 ---
 
 # In-a-Dyn DDNS
@@ -37,6 +45,9 @@ date: February 17, 2020
 
 ## How does it work?
 
+> A good DDNS client actively tracks changes to your *external* IP address,  
+> and automatically updates your DDNS provider(s).
+
  - Most DDNS providers have a "check ip" server, e.g. <https://checkip.dyndns.com>
 
         jocke@fra:~$ curl checkip.dyndns.com
@@ -46,24 +57,21 @@ date: February 17, 2020
    manually, of course, but most users prefer an automatic service do
    this for them
 
-> A good DDNS client actively tracks changes to your *external* IP address,  
-> and automatically updates your DDNS provider(s).
-
 ## Common Use-Case
-
-![](img/ddns-problem.svg)
-
-- User has multiple connected sites
-- Each site has a DHCP address
 
 > How do we set up a VPN to each site when ISPs can change address of
 > our sites at any time?  Note, even if you swap it around and let the
 > sites connect to your head office, it may also have a DHCP address.
 
+![](img/ddns-problem.svg){ width=75% }
+
+- User has multiple connected sites
+- Each site has a DHCP address
+
 
 ## Solution
 
-![](img/ddns-solution.svg)
+![](img/ddns-solution.svg){ width=75% }
 
 1. Sites connect to DDNS provider update their DNS entry
 2. DDNS provider publishes update DNS record to Internet
@@ -110,7 +118,7 @@ date: February 17, 2020
 
 ## Testing
 
-<img src="img/Internet-of-Things.jpg" width="40%" style="float:right;">
+![](img/Internet-of-Things.jpg){ width=40% style="fload:right," }
 
 - How to test this?
   - HTTPS certificates
