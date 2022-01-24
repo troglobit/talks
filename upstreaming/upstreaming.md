@@ -106,11 +106,11 @@ link_attributes: true
     - "I'm too embarrassed to tell my manager I don't know how to ..."
     - "Surely nobody's interested in our patches, they're not even that good ..."
   - Projects have due dates:
-    - upstreaming is a line activity
-    - no time reserved for devs
+    - Upstreaming is a line activity
+    - No time reserved for devs
   - Unclear if it's allowed -- *everything* classified as
-    - intellectual property
-    - business critical
+    - ... intellectual property
+    - ... business critical
   - Weak (or no) line organization
   - Perceived cost
 
@@ -137,9 +137,7 @@ link_attributes: true
 **Stability:** remember when projects started backporting stuff -- badly?
 
 **Interop:** end-customer often wants or needs to use multiple vendors.
-Not sharing changes with competition can lead to interop issues.
-
-**Timeline:** ship with NetBox container of tcnopen/train stack
+  Not sharing changes with competition can lead to interop issues.
 
 :::
 
@@ -164,8 +162,8 @@ Not sharing changes with competition can lead to interop issues.
     - Other integration changes required for our end-product
   - Disabling of package syslog messages
   - Changes to package identity:
-    - hide exact package/version from port scanners and log skimmers
-    - logs which can be sent as clear text over the wire
+    - Hide exact package/version from port scanners and log skimmers
+    - Logs which can be sent as clear text over the wire
   - Other Company specific patches
     - Performance optimizations, e.g., moving tasks from  
       a power-save work queue to a high-priority one
@@ -198,9 +196,9 @@ Not sharing changes with competition can lead to interop issues.
 > Maybe we need to start with the obvious question --  
 > who wants to participate in upstreaming?
 
-  - Not all devs may want to work with upstreaming
-    - privacy issues -- e.g. protected identity for self or family members
-    - personal preferences -- association with Company outside work
+  - Not all devs may want to work with upstreaming due to
+    - ... privacy issues -- e.g. protected identity for self or family members
+    - ... personal preferences -- association with Company outside work
   - GDPR, right to be forgotten -- how should Company handle this?
   - Company may end up needing an upstreaming team just because of this ...
   - Even more obvious perhaps, who does the company trust  
@@ -244,7 +242,7 @@ Not sharing changes with competition can lead to interop issues.
     - *Signed-off-by:* "I sign off on this, attesting to origin of change ..."
     - *Reviewed-by:* "Reviewed by me, attesting to technical validity and readiness ..."
     - etc.
-    - Only *Signed-off-by* makes sense when submitting changes upstream
+  - *Signed-off-by* is the only applicable tag when submitting changes upstream
     - It is expected that you have (reviewed and) tested changes before sending
   - Initiated by Linux kernel community
   - Used by many other projects today
@@ -266,6 +264,7 @@ Not sharing changes with competition can lead to interop issues.
   - Addressing the Right People
     - Is it the proper sub-project or mailing-list?
     - `To:` and `Cc:` of the correct people
+  - Testing the waters `--rfc`, or **ready for mainline**?
   - Setting up Your Email Client MUA)
   - Add email header (see `~/.gitconfig` later):
     - `Organization: Company Inc`
@@ -288,13 +287,14 @@ Not sharing changes with competition can lead to interop issues.
     → you can assume other's on the mailing list know how the program/subsystem works
   - When applicable; avoid vendor-specific terminology, use IEEE/IETF
   - New standards based features:
-    - explain how it relates to the standard
-    - how it applies to the program/subsystem
+    - Explain how it relates to the standard
+    - How it applies to the program/subsystem
   - There may be many more use-cases for your new feature/setting
   - Be prepared to **rework patch to generalize even further** → this is a good thing™
   - Don't send reminders, at least not too soon!
-    - *help out* instead to do Reviewed-by on other's patches
-    - at least two weeks before sending reminder to mailing-list/pull-request/IRC
+    - Maintainers are likely busy with other things, also they don't who you are
+    - *Help out* instead to do Reviewed-by on other's patches -- build cred & learn
+    - At least two weeks before sending reminder to mailing-list/pull-request/IRC
   - Always **reply to feedback!** *(Using Reply-All, not private replies ...)*
     - Ask questions if you don't understand what something means
     - Even if you understand and plan to address feedback, say so!
@@ -388,6 +388,13 @@ Not sharing changes with competition can lead to interop issues.
 
    The `foo.config` menuconfig snippet enabling `BR2_PACKAGE_FOO=y` and deps.
 
+::: notes
+
+> Applies to many other mailing-list based projects as well
+
+:::
+
+
 ## Buildroot Checklist (2/2)
 
 6. Format your patches, with `--cover-letter` for patch sets
@@ -468,6 +475,7 @@ Not sharing changes with competition can lead to interop issues.
   - Preferably join the Company org. on GitHub
   - Preferably fork project to the Company org.
   - Checklist: <https://gist.github.com/Chaser324/ce0505fbed06b947d962>
+  - Consider Pull Request Description == cover letter
 
 # Email Clients
 
@@ -503,13 +511,13 @@ Debian/Ubuntu/Mint users will need to install the optional
   - Doesn't add any obnoxious corporate footer
   - Your contributions are yours:
     - Remember attribution to Company previously
-  - However, **avoid it:**
-    - changes tabs to spaces
-    - wraps text (patch text) unconditionally
+  - However, **avoid the web client:**
+    - Changes tabs to spaces
+    - Wraps text (patch text) unconditionally
     - Base64 encodes messages with non US ASCII characters: åäö
   - Instead, **use with external client**:
-    - get [application specific password](https://myaccount.google.com/apppasswords)
-    - enable [IMAP for fetching email](https://mail.google.com/mail/u/0/#settings/fwdandpop)
+    - Get [application specific password](https://myaccount.google.com/apppasswords)
+    - Enable [IMAP for fetching email](https://mail.google.com/mail/u/0/#settings/fwdandpop)
 
 ---
 
@@ -623,6 +631,11 @@ select Preformat, then paste with the middle button.
 :::
 
 ---
+
+### Demo of patchwork -- review states
+
+---
+
 
 ### Demo git format-patch and generated files
 
