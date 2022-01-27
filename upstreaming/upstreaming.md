@@ -265,7 +265,7 @@ link_attributes: true
     - Is it the proper sub-project or mailing-list?
     - `To:` and `Cc:` of the correct people
   - Testing the waters `--rfc`, or **ready for mainline**?
-  - Setting up Your Email Client MUA)
+  - Setting up Your Email Client (MUA)
   - Add email header (see `~/.gitconfig` later):
     - `Organization: Company Inc`
     - Credits Company as sponsor of the work
@@ -542,7 +542,7 @@ Debian/Ubuntu/Mint users will need to install the optional
 [sendemail.netdev]
     to             = "davem@davemloft.net, kuba@kernel.org"
     cc             = "netdev@vger.kernel.org"
-    cccmd          = "./scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats"
+    cccmd          = "./scripts/get_maintainer.pl --norolestats"
 
 # You can also use "alias-foo" in to= and cc=, expands from ~/.config/mutt/aliases
 # git send-email --identity netdev mail/*
